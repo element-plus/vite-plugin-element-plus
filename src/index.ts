@@ -23,9 +23,8 @@ const transform = (
     const components = identifiers.split(',')
     const styleImports = []
     components.forEach(c => {
-      const trimmed = c.trim()
-      if (trimmed.startsWith(prefix)) {
-        const component = trimmed.slice(prefix.length)
+      if (c.startsWith(prefix)) {
+        const component = c.slice(prefix.length)
         if (useSource) {
           styleImports.push(
             `import '${lib}/es/components/${component.toLowerCase()}/style'`
