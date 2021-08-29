@@ -75,7 +75,7 @@ const defaultOptions = {
   prefix: 'El',
 }
 
-export default (options: VitePluginElementPlusOptions) => {
+export default (options?: VitePluginElementPlusOptions) => {
   const exclude = 'node_modules/**'
   const include = ['**/*.vue', '**/*.ts', '**/*.js', '**/*.tsx', '**/*.jsx']
 
