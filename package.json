@@ -29,7 +29,8 @@
   "homepage": "https://github.com/element-plus/vite-plugin-element-plus/tree/main/#readme",
   "dependencies": {
     "@rollup/pluginutils": "^4.1.0",
-    "es-module-lexer": "^0.6.0"
+    "es-module-lexer": "^0.6.0",
+    "magic-string": "^0.25.7"
   },
   "peerDependencies": {
     "vite": ">=2.0.0"
