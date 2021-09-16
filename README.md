@@ -1,4 +1,8 @@
-# vite-plugin-element-plus
+# Archived
+
+If you are looking for plugins please go to https://github.com/element-plus/unplugin-element-plus
+
+## vite-plugin-element-plus
 
 [English](README.md) | [中文](README.zh-CN.md)
 
