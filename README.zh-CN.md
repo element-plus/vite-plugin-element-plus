@@ -1,4 +1,9 @@
-# vite-plugin-element-plus
+# 已归档
+
+如果你正在找 Element Plus 相关的插件请移步：https://github.com/element-plus/unplugin-element-plus
+
+
+## vite-plugin-element-plus
 
 [English](README.md) | [中文](README.zh-CN.md)
 
