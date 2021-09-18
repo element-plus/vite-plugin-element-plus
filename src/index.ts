@@ -1,7 +1,8 @@
 import { createFilter } from '@rollup/pluginutils'
 import { init, parse } from 'es-module-lexer'
+import MagicString from 'magic-string'
 
-import type { Plugin } from 'vite'
+import type { Plugin, ResolvedConfig } from 'vite'
 import type { ImportSpecifier } from 'es-module-lexer'
 
 const hyphenateRE = /\B([A-Z])/g
@@ -83,9 +84,15 @@ export default (options: VitePluginElementPlusOptions) => {
   options = Object.assign(defaultOptions, options)
   const { useSource, lib, prefix, format } = options
 
+  let config: ResolvedConfig
+
   const plugin: Plugin = {
     name: 'vite-plugin-element-plus',
     enforce: 'post',
+
+    configResolved(resolvedConfig) {
+      config = resolvedConfig
+    },
 
     async transform(source, id) {
       if (!source) return
@@ -110,17 +117,11 @@ export default (options: VitePluginElementPlusOptions) => {
         .join('\n')
 
       const lastSpecifier = specifiers[specifiers.length - 1]
-      try {
-        const ret = `${source.slice(
-          0,
-          lastSpecifier.se
-        )}\n${styleImports}\n${source.slice(lastSpecifier.se + 1)}`
-        return ret
-      } catch (e) {
-        if (process.env.NODE_ENV !== 'production') {
-          console.error(e.message)
-        }
-        return source
+      const str = new MagicString(source)
+      str.appendLeft(lastSpecifier.se + 1, `\n${styleImports}\n`)
+      return {
+        code: str.toString(),
+        map: config.build.sourcemap ? str.generateMap({ hires: true }) : null,
       }
     },
   }
